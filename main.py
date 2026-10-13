@@ -2,7 +2,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.label import Label
 
-SITE_URL = "https://আপনার-আসল-লিংক.onrender.com"
+SITE_URL = "https://amar-belkuri-app.onrender.com/"
 
 webview = None
 
