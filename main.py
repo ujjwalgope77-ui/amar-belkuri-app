@@ -2,8 +2,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.label import Label
 
-# TODO: এখানে আপনার হোস্ট করা ওয়েবসাইটের লিংক বসান (https দিয়ে)
-SITE_URL = "https://YOUR-APP-URL.onrender.com"
+SITE_URL = "https://আপনার-আসল-লিংক.onrender.com"
 
 webview = None
 
@@ -51,7 +50,6 @@ class MainApp(App):
         return Label(text="Loading...")
 
     def on_key(self, window, key, *args):
-        # Back button
         if key == 27 and ON_ANDROID and webview is not None:
             go_back()
             return True
