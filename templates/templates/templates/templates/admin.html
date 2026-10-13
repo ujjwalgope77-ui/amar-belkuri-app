@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<p><a class="btn red" href="{{ url_for('admin_logout') }}">লগআউট</a></p>
+<h2>নতুন পণ্য যোগ করুন</h2>
+<form method="post" action="{{ url_for('admin_add') }}">
+  <input name="name" placeholder="পণ্যের নাম" required>
+  <input name="price" type="number" step="0.01" placeholder="দাম" required>
+  <input name="image" placeholder="ছবির লিংক (ঐচ্ছিক)">
+  <textarea name="description" placeholder="বিবরণ"></textarea>
+  <button>যোগ করুন</button>
+</form>
+
+<h2>পণ্য তালিকা</h2>
+<div class="scroll"><table>
+  {% for p in products %}
+  <tr><td>{{ p.name }}</td><td>৳{{ "%.0f"|format(p.price) }}</td>
+  <td><form method="post" action="{{ url_for('admin_delete', pid=p.id) }}"><button class="red">মুছুন</button></form></td></tr>
+  {% endfor %}
+</table></div>
+
+<h2>অর্ডার সমূহ</h2>
+<div class="scroll"><table>
+  <tr><th>#</th><th>নাম</th><th>ফোন</th><th>ঠিকানা</th><th>পণ্য</th><th>মোট</th></tr>
+  {% for o in orders %}
+  <tr><td>{{ o.id }}</td><td>{{ o.name }}</td><td>{{ o.phone }}</td><td>{{ o.address }}</td><td>{{ o["items"] }}</td><td>৳{{ "%.0f"|format(o.total) }}</td></tr>
+  {% else %}<tr><td colspan="6">কোনো অর্ডার নেই।</td></tr>{% endfor %}
+</table></div>
+{% endblock %}
