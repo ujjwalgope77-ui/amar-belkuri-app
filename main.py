@@ -39,6 +39,8 @@ def create_webview():
 def go_back():
     if webview is not None and webview.canGoBack():
         webview.goBack()
+    else:
+        PythonActivity.mActivity.finish()
 
 
 class MainApp(App):
