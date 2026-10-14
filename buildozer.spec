@@ -5,7 +5,8 @@ package.domain = org.amarbelkuri
 source.dir = .
 source.include_exts = py,png,jpg,kv
 source.exclude_dirs = templates,static,.github,bin,.buildozer
-icon.filename = %(source.dir)s/icon.png
+icon.filename = %(source.dir)s/ab.png
+presplash.filename = %(source.dir)s/ab.png
 version = 1.0
 requirements = python3==3.11.5,hostpython3==3.11.5,kivy==2.3.0,pyjnius,android
 orientation = portrait
