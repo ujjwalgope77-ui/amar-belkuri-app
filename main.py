@@ -24,14 +24,20 @@ except ImportError:
 @run_on_ui_thread
 def create_webview():
     global webview
-    activity = PythonActivity.mActivity
-    webview = WebView(activity)
-    settings = webview.getSettings()
-    settings.setJavaScriptEnabled(True)
-    settings.setDomStorageEnabled(True)
-    webview.setWebViewClient(WebViewClient())
-    activity.setContentView(webview)
-    webview.loadUrl(SITE_URL)
+    try:
+        activity = PythonActivity.mActivity
+        webview = WebView(activity)
+        settings = webview.getSettings()
+        settings.setJavaScriptEnabled(True)
+        settings.setDomStorageEnabled(True)
+        settings.setLoadWithOverviewMode(True)
+        settings.setUseWideViewPort(True)
+        webview.setWebViewClient(WebViewClient())
+        activity.setContentView(webview)
+        webview.requestFocus()
+        webview.loadUrl(SITE_URL)
+    except Exception as e:
+        print("WEBVIEW ERROR:", e)
 
 
 @run_on_ui_thread
@@ -45,12 +51,16 @@ def go_back():
 class MainApp(App):
     def build(self):
         Window.bind(on_keyboard=self.on_key)
+        return Label(text="Loading... (first load may take up to 1 minute)")
+
+    def on_start(self):
+        # Create the WebView only after the Kivy window is ready
         if ON_ANDROID:
             create_webview()
-        return Label(text="Loading...")
 
     def on_key(self, window, key, *args):
-        if key == 27 and ON_ANDROID and webview is not None:
+        # 27 = Android Back button
+        if key == 27 and ON_ANDROID:
             go_back()
             return True
         return False
