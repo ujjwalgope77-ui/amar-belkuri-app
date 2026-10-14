@@ -1,6 +1,8 @@
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.label import Label
+from kivy.uix.image import Image
+from kivy.uix.boxlayout import BoxLayout
 
 SITE_URL = "https://amar-belkuri-app.onrender.com/"
 
@@ -51,7 +53,13 @@ def go_back():
 class MainApp(App):
     def build(self):
         Window.bind(on_keyboard=self.on_key)
-        return Label(text="Loading... (first load may take up to 1 minute)")
+        layout = BoxLayout(orientation="vertical", padding=40, spacing=20)
+        layout.add_widget(Image(source="ab.png"))
+        layout.add_widget(Label(
+            text="Loading... (first load may take up to 1 minute)",
+            size_hint_y=0.2,
+        ))
+        return layout
 
     def on_start(self):
         if ON_ANDROID:
