@@ -54,12 +54,10 @@ class MainApp(App):
         return Label(text="Loading... (first load may take up to 1 minute)")
 
     def on_start(self):
-        # Create the WebView only after the Kivy window is ready
         if ON_ANDROID:
             create_webview()
 
     def on_key(self, window, key, *args):
-        # 27 = Android Back button
         if key == 27 and ON_ANDROID:
             go_back()
             return True
