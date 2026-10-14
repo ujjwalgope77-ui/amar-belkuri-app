@@ -3,9 +3,11 @@ title = Amar Belkuri
 package.name = amarbelkuri
 package.domain = org.amarbelkuri
 source.dir = .
-source.include_exts = py,png,jpg,jpeg,kv,atlas,json,html,css,js,ttf
+source.include_exts = py,png,jpg,kv
+source.exclude_dirs = templates,static,.github,bin,.buildozer
+icon.filename = %(source.dir)s/icon.png
 version = 1.0
-requirements = python3,kivy==2.3.0,requests,urllib3,chardet,idna,certifi,openssl,pyjnius,android
+requirements = python3,kivy==2.3.0,pyjnius,android
 orientation = portrait
 fullscreen = 0
 android.permissions = INTERNET
