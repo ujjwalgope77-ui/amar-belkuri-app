@@ -27,14 +27,18 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
-          pip install --upgrade pip
+          sudo apt-get install -y build-essential ccache git zip unzip \
+            autoconf automake libtool libtool-bin pkg-config \
+            zlib1g-dev libncurses5-dev libncursesw5-dev cmake \
+            libffi-dev libssl-dev libltdl-dev uuid-dev
+          pip install --upgrade pip setuptools
           pip install buildozer "cython==0.29.36" virtualenv
 
       - name: Build APK
-        run: buildozer -v android debug
+        run: yes | buildozer -v android debug
 
       - uses: actions/upload-artifact@v4
         with:
           name: amar-belkuri-apk
           path: bin/*.apk
+          if-no-files-found: error
